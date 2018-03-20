@@ -1,6 +1,22 @@
 # -*- coding: utf-8 -*-
+"""This module contains all clases modeling hardware like comliks, clusters, nexi, etc.
+
+
+System <= Response
+If System > Response -> System = Response
+Programs <= System
+#(Loaded programs) >= System -> Response loss
+
+
+Processor Limit:
+- Nodes: System
+- Nexi: System * 3
+
+
+"""
 
 class Node(object):
+    """This class models a node, for example a comlink."""
 
     def __init__(self, name, response, signal, system, firewall):
         self.name = name
@@ -10,19 +26,15 @@ class Node(object):
         self.system = None
         self.firewall = None
         self.loaded_programs = []
+        self.neighbours = []
 
         self.set_system(system)
         self.set_firewall(firewall)
 
-
     def __str__(self):
-        """
-        """
         return self.__repr__()
 
     def __repr__(self):
-        """
-        """
         if self.effective_response != self.response:
             reduced_response = "({})".format(self.effective_response)
         else:
@@ -74,6 +86,17 @@ class Node(object):
             print(f"Error: Tried to remove program {program} which is not in the list of the current node.")
             raise
 
+    def add_neighbour(self, node):
+        """Add a new neigbbouring node."""
+        self.neighbours.append(node)
+
+    def remove_neighbour(self, node):
+        """Remove a neighbouring node."""
+        try:
+            self.neighbours.remove(node)
+        except ValueError:
+            print(f"Error: Tried to remove neighbour {node} which is not in the list of the current node.")
+            raise
 
 if __name__ == "__main__":
     n = Node("Comlink", 2, 3, 4, 5)

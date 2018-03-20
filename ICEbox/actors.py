@@ -16,6 +16,8 @@ class Actor(object):
         self.programs = []
         self.restricting_node = None
         self.current_node = None
+        self.max_dmg_boxes = 8 + (rating // 2)
+        self.current_dmg_boxes = self.max_dmg_boxes
 
     def move(self, node):
         """Move the agent to another node."""
@@ -28,7 +30,10 @@ class Actor(object):
 
 
 class Agent(Actor):
-    """This class models agents as described in SRBB p.TODO"""
+    """This class models agents as described in SRBB p.TODO
+
+    Pilot Rating, System = Pilot, Firewall = Pilot, No System, Response of Node it is running on.
+    """
 
     def __init__(self, name, rating):
         """
@@ -41,7 +46,10 @@ class Agent(Actor):
 
 
 class ICE(Actor):
-    """This class models agents as described in SRBB p.TODO"""
+    """This class models agents as described in SRBB p.TODO
+    
+    Work just as Agents.
+    """
     def __init__(self, name, rating, payload):
         """
         """
