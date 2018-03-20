@@ -14,6 +14,7 @@ Processor Limit:
 
 
 """
+import .actors
 
 class Node(object):
     """This class models a node, for example a comlink."""
@@ -67,7 +68,21 @@ class Node(object):
         """Manage response loss due to high program load.
         """
         # TODO: Does a reduced response also affect the system rating?
-        response_modifier = len(self.loaded_programs) // self.response
+        response_lowering_programs = []
+        for program in self.loaded_programs:
+            if isinstance(program, actors.ICE):
+                # ICE and all of its running programs count against response loss
+                response_lowering_programs.append(program)
+                response_lowering_programs.extend(program.payload)
+            elif isinstance(program, actors.Agent):
+                # count Agents only if they are in independent mode
+                if not program.independent:
+                    response_lowering_programs.append(program)
+                # Programs run by agents count towards the processor limit either way
+                response_lowering_programs.extend(program.payload)
+            else:
+                response_lowering_programs.append(program)
+        response_modifier = len(response_lowering_programs) // self.response
         self.effective_response = self.response - response_modifier
 
     def add_program(self, program):
@@ -97,6 +112,7 @@ class Node(object):
         except ValueError:
             print(f"Error: Tried to remove neighbour {node} which is not in the list of the current node.")
             raise
+
 
 if __name__ == "__main__":
     n = Node("Comlink", 2, 3, 4, 5)
