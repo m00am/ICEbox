@@ -65,8 +65,7 @@ class Node(object):
             raise ValueError(f"Firewall value has to be a positive integer. Got {firewall}")
 
     def recalculate_response_loss(self):
-        """Manage response loss due to high program load.
-        """
+        """Manage response loss due to high program load."""
         # TODO: Does a reduced response also affect the system rating?
         response_lowering_programs = []
         for program in self.loaded_programs:
