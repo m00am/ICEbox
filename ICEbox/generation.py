@@ -7,6 +7,25 @@ import .software
 
 
 
+CON_NAMES = [
+    # The big 10
+    "Ares",
+    "Aztechnology",
+    "Evo",
+    "Horizon",
+    "Mitsuhama",
+    "Renraku",
+    "Saeder-Krupp",
+    "Shiawaze",
+    "Spinrad",
+    "Wuxing",
+
+    "Cross",
+    "Yakashima",
+]
+
+
+
 
 ## patterns
 # honeypot  (looks interesting, is veeery dangerous)
@@ -19,10 +38,15 @@ import .software
 # private/ internal UI  (For users of the system, dev suites, )
 # API  ()
 # data vault  (big ass storage facility, inherent high level browse)
+# paydata vault  (contains money!)
 # compute server  (high response machines)
 # sysadmin node  (periheral data for all computer systems)
 # spider node  (control over all active users, inherent search)
-# 
+# terminal  (runs some programs, thats it)
+# uplink node  (allows connection to other subnet)
+# satelite  (as the name suggests)
+# log node  (keeps the datalog)
+
 
 
 
@@ -35,12 +59,10 @@ import .software
 
 
 ## Tree by escalating privacy value
-
+# public, private, restricted, secret
 
 
 ## minimal nodes and example nodes
-
-
 def get_tiny_nodes():
     tiny_nodes = dict()
 
@@ -51,6 +73,32 @@ def get_tiny_nodes():
     tiny_nodes["Camera"] = n
 
     # a vending machine
-    n = nodes.Node("Coffe Vending Machine", 2, 1, 2, 2)
+    n = nodes.Node("Coffee Vending Machine", 2, 1, 2, 2)
+    tiny_nodes["Coffee Vending Machine"] = n
     
+    # a terminal in a public library
+    n = nodes.Node("Library Terminal", 3, 2, 3, 2)
+    n.add_program(programs.Program("Browse", 3))
+    n.add_program(programs.Program("Edit", 3))
+    tiny_nodes[n.name] = n
+
+    # Cheap comlink
+    n = nodes.Node("Cheap Comlink", 2, 3, 2, 1)
+    n.add_program(programs.Program("Analyze", 2))
+    tiny_nodes[n.name] = n
+
+    # Average comlink
+    n = nodes.Node("Average Comlink", 3, 3, 3, 3)
+    n.add_program(programs.Program("Analyze", 2))
+    a = actor.ICE("Rottweiler", 3, [programs.Program("Attack", 3)])
+    tiny_nodes[n.name] = n
+    
+    return tiny_nodes
+
+
+
+## ICE
+
+def random_ICE():
+
     
