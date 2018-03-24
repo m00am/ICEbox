@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 """Put everything that generates a system structure here.
 """
-import .nodes
-import .actors
-import .software
-
-
+import nodes
+import actors
+import software
+import random
 
 CON_NAMES = [
     # The big 10
@@ -22,6 +21,19 @@ CON_NAMES = [
 
     "Cross",
     "Yakashima",
+]
+
+
+
+class Name:
+    def __init__(self, name, connotations):
+        self.name = name
+        self.connotations = connotations
+
+ICE_NAMES = [
+    Name("Rottweiler", ["offensive", "defensive"]),
+    Name("Knight",  ["offensive", "defensive"]),
+    Name("Bloodhound", ["defensive", "tracking"]),
 ]
 
 
@@ -99,6 +111,22 @@ def get_tiny_nodes():
 
 ## ICE
 
-def random_ICE():
+def random_ICE(rating=None, role=None):
+    if role is None:
+        role = random.choice(("offensive", "defensive", "tracker"))
+    if rating is None:
+        rating = random.randint(1,6)
+    name = f"{random.choice(CON_NAMES)} {random.choice(ICE_NAMES).name}"
+    if role == "offensive":
+        payload = ["Attack"]
+    elif role == "defensive":
+        payload = ["Analyze"]
+    elif role == "tracker":
+        payload = ["Analyze", "Trace"]
+    else:
+        raise ValueError(f"Invalid role {role}")
+    return actors.ICE(name, rating, payload)
 
-    
+
+if __name__ == "__main__":
+    print(random_ICE())

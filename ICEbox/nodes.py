@@ -14,7 +14,7 @@ Processor Limit:
 
 
 """
-import .actors
+import actors
 
 class Node(object):
     """This class models a node, for example a comlink."""
