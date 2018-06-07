@@ -80,8 +80,36 @@ Glitches:
 import copy
 import random
 
+
 PROG_TYPE_MAPPING = {
     "Edit": ["Common"],
+    "Analyze": ["Common", "Detection"],
+    "Browse": ["Common", "Detection"],
+    "Command": ["Common"],
+    "Edit": ["Common"],
+    "Encrypt": ["Common", "Electronic Warfare"],
+    "Reality Filter": ["Common", "User"],
+    "Scan": ["Common", "Detection", "Electronic Warfare"],
+
+    "Armor": ["Cybercombat"],
+    "Attack": ["Cybercombat"],
+    "Biofeedback Filter": ["Cybercombat","User"],
+    "Black Hammer": ["Cybercombat"],
+    "Blackout": ["Cybercombat"],
+    "Corrupt": ["Electronic Warfare"],
+    "Data Bomb": [],
+    "Decrypt": ["Intrusion", "Electronic Warfare"],
+    "Defuse": ["Intrusion"],
+    "Disarm": ["Intrusion"],
+    "ECCM": ["Electronic Warfare"],
+    "Exploit": ["Intrusion"],
+    "Medic": ["Cybercombat"],  # also user?
+    "Nuke": ["Cybercombat"],
+    "Purge": [],
+    "Sniffer": ["Electronic Warfare"],
+    "Spoof": ["Intrusion", "Electronic Warfare"],
+    "Stealth": ["Intrusion"],
+    "Track": ["Detection", "Electronic Warfare"],
     }
 
 TYPE_NAME_MAPPING = {
