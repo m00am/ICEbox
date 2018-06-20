@@ -82,39 +82,91 @@ import random
 
 
 PROG_TYPE_MAPPING = {
-    "Edit": ["Common"],
     "Analyze": ["Common", "Detection"],
     "Browse": ["Common", "Detection"],
     "Command": ["Common"],
     "Edit": ["Common"],
-    "Encrypt": ["Common", "Electronic Warfare"],
+    "Encrypt": ["Common", "Intrusion Defense", "Electronic Warfare"],
     "Reality Filter": ["Common", "User"],
     "Scan": ["Common", "Detection", "Electronic Warfare"],
 
-    "Armor": ["Cybercombat"],
-    "Attack": ["Cybercombat"],
-    "Biofeedback Filter": ["Cybercombat","User"],
-    "Black Hammer": ["Cybercombat"],
-    "Blackout": ["Cybercombat"],
+    "Armor": ["Cybercombat Defensive"],
+    "Attack": ["Cybercombat Offensive"],
+    "Biofeedback Filter": ["Cybercombat Defensive", "User"],
+    "Black Hammer": ["Cybercombat Offensive"],
+    "Blackout": ["Cybercombat Offensive"],
     "Corrupt": ["Electronic Warfare"],
-    "Data Bomb": [],
-    "Decrypt": ["Intrusion", "Electronic Warfare"],
-    "Defuse": ["Intrusion"],
-    "Disarm": ["Intrusion"],
+    "Data Bomb": ["Intrusion Defense"],
+    "Decrypt": ["Intrusion Offensive", "Electronic Warfare"],
+    "Defuse": ["Intrusion Offensive"],
+    "Disarm": ["Intrusion Offensive"],
     "ECCM": ["Electronic Warfare"],
-    "Exploit": ["Intrusion"],
-    "Medic": ["Cybercombat"],  # also user?
-    "Nuke": ["Cybercombat"],
-    "Purge": [],
+    "Exploit": ["Intrusion Offensive"],
+    "Medic": ["Cybercombat Defensive"],  # also user?
+    "Nuke": ["Cybercombat Offensive"],
+    "Purge": ["Intrusion Offensive", "Intrusion Defense"],
     "Sniffer": ["Electronic Warfare"],
-    "Spoof": ["Intrusion", "Electronic Warfare"],
-    "Stealth": ["Intrusion"],
+    "Spoof": ["Intrusion Offensive", "Electronic Warfare"],
+    "Stealth": ["Intrusion Offensive"],
     "Track": ["Detection", "Electronic Warfare"],
     }
 
 TYPE_NAME_MAPPING = {
-    "Common": ["Edit"],
-    }
+    "Common": [
+        "Analyze",
+        "Browse",
+        "Command",
+        "Edit",
+        "Encrypt",
+        "Reality Filter",
+        "Scan",
+    ],
+    "Cybercombat Offensive": [
+        "Attack",
+        "Black Hammer",
+        "Blackout",
+        "Nuke"
+    ],
+    "Cybercombat Defensive": [
+        "Armor",
+        "Biofeedback Filter",
+        "Medic",
+    ],
+    "Detection": [
+        "Analyze",
+        "Browse",
+        "Scan",
+        "Track",
+    ],
+    "Electronic Warfare": [
+        "Encrypt",
+        "Scan",
+        "Corrupt",
+        "Decrypt",
+        "ECCM",
+        "Sniffer",
+        "Spoof",
+        "Track",
+    ],
+    "Intrusion Offensive": [
+        "Decrypt",
+        "Defuse",
+        "Disarm",
+        "Exploit",
+        "Spoof",
+        "Stealth",
+        "Purge",
+    ],
+    "Intrusion Defense": [
+        "Encrypt",
+        "Data Bomb",
+        "Purge"
+    ],
+    "User": [
+        "Biofeedback Filter",
+        "Reality Filter"
+    ],
+}
 
 
 class Program(object):
@@ -176,6 +228,9 @@ class ProgOption(object):
         ...
 
 
+
+def validate_program_dicts():
+    # check that the dictionaries are bijective
 
 if __name__ == "__main__":
     p = Program("Edit", 6)
