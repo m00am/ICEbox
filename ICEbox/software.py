@@ -231,7 +231,17 @@ class ProgOption(object):
 
 def validate_program_dicts():
     # check that the dictionaries are bijective
+    for name, types in PROG_TYPE_MAPPING.items():
+        for t in types:
+            if name not in TYPE_NAME_MAPPING[t]:
+                print(f"Found invalid mapping: {name}({types}), program name was not found in {t}")
 
+    for prog_type, names in TYPE_NAME_MAPPING.items():
+        for name in names:
+            if prog_type not in PROG_TYPE_MAPPING[name]:
+                print(f"Found invalid mapping: {prog_type}({names}), type was not found in {name}")
+        
 if __name__ == "__main__":
     p = Program("Edit", 6)
     print(p)
+    validate_program_dicts()
