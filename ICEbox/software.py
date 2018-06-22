@@ -79,7 +79,7 @@ Glitches:
 """
 import copy
 import random
-
+import sys
 
 PROG_TYPE_MAPPING = {
     "Analyze": ["Common", "Detection"],
@@ -87,7 +87,7 @@ PROG_TYPE_MAPPING = {
     "Command": ["Common"],
     "Edit": ["Common"],
     "Encrypt": ["Common", "Intrusion Defense", "Electronic Warfare"],
-    "Reality Filter": ["Common", "User"],
+    "Reality Filter": ["Common", "User", "f"],
     "Scan": ["Common", "Detection", "Electronic Warfare"],
 
     "Armor": ["Cybercombat Defensive"],
@@ -230,17 +230,36 @@ class ProgOption(object):
 
 
 def validate_program_dicts():
-    # check that the dictionaries are bijective
-    for name, types in PROG_TYPE_MAPPING.items():
-        for t in types:
-            if name not in TYPE_NAME_MAPPING[t]:
-                print(f"Found invalid mapping: {name}({types}), program name was not found in {t}")
+    """ Check that the dictionaries are bijective.
 
-    for prog_type, names in TYPE_NAME_MAPPING.items():
-        for name in names:
-            if prog_type not in PROG_TYPE_MAPPING[name]:
-                print(f"Found invalid mapping: {prog_type}({names}), type was not found in {name}")
+    This means, that all types 
+    """
+    valid = True
+    try:
+        for name, types in PROG_TYPE_MAPPING.items():
+            for t in types:
+                if name not in TYPE_NAME_MAPPING[t]:
+                    print(f"Found invalid mapping: {name}({types}), program name was not found in {t}")
+                    valid = False
+    except KeyError:
+        print("Could not find program name in TYPE_NAME_MAPPING. Terminating.")
+        raise
+
+    try:
+        for prog_type, names in TYPE_NAME_MAPPING.items():
+            for name in names:
+                if prog_type not in PROG_TYPE_MAPPING[name]:
+                    print(f"Found invalid mapping: {prog_type}({names}), type was not found in {name}")
+                    valid = False
+    except KeyError:
+        print("Could not find program type in PROG_TYPE_MAPPING. Terminating.")
+        raise
         
+    if not valid:
+        print("Errors in the type mapping dicts were found. Terminating.")
+        sys.exit(1)
+
+
 if __name__ == "__main__":
     p = Program("Edit", 6)
     print(p)
