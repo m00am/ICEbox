@@ -219,6 +219,12 @@ class Program(object):
             # select from kept
 
 
+    # def get_processor_load(self):
+    #     # TODO: consider optimization of omlinks etc at a later stage
+    #     # TODO: consider glitches and options
+    #     return self.rating
+
+
 class ProgOption(object):
     """An option for a program.
     """
