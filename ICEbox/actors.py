@@ -79,12 +79,15 @@ class ICE(Actor):
     def __init__(self, name, rating, payload):
         """Create a new ICE using a name, rating and list of programs (payload)."""
         self.name = name
-        self.payload = payload
+        if isinstance(payload, list):
+            self.payload = payload
+        else:
+            self.payload = [payload]
         self.independent = True
         super(ICE, self).__init__(rating)
 
     def __repr__(self):
-        return f"ICE '{self.name}' {super(ICE, self).__repr__()}"
+        return f"ICE '{self.name}' [{', '.join([str(s) for s in self.payload])}] {super(ICE, self).__repr__()}"
 
 if __name__ == "__main__":
     a = Agent("Sentinel", 4, [], independent=True)

@@ -113,18 +113,19 @@ def get_tiny_nodes():
 
 def random_ICE(rating=None, role=None):
     if role is None:
-        role = random.choice(("offensive", "defensive", "tracker"))
+        role = random.choice(list(software.TYPE_NAME_MAPPING.keys()))
+
     if rating is None:
         rating = random.randint(1,6)
+
     name = f"{random.choice(CON_NAMES)} {random.choice(ICE_NAMES).name}"
-    if role == "offensive":
-        payload = ["Attack"]
-    elif role == "defensive":
-        payload = ["Analyze"]
-    elif role == "tracker":
-        payload = ["Analyze", "Trace"]
-    else:
+
+    try:
+        payload_candidates = software.TYPE_NAME_MAPPING[role]
+        payload = random.choice(payload_candidates)
+    except KeyError:
         raise ValueError(f"Invalid role {role}")
+
     return actors.ICE(name, rating, payload)
 
 
