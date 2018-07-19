@@ -35,6 +35,8 @@ ICE_NAMES = [
     Name("Rottweiler", ["offensive", "defensive"]),
     Name("Knight",  ["offensive", "defensive"]),
     Name("Bloodhound", ["defensive", "tracking"]),
+    # TODO: expand this list
+    Name("Angel", ["defensive"]),
 ]
 
 
@@ -126,7 +128,7 @@ def random_ICE(rating=None, role=None, nr_progs=None):
         rating = random.randint(1,6)
 
     if nr_progs is None:
-        nr_progs = 1 + np.random.poisson(0.999)
+        nr_progs = 1 + np.random.poisson(1.5)
 
     name = f"{random.choice(CON_NAMES)} {random.choice(ICE_NAMES).name}"
 
