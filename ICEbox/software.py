@@ -166,7 +166,17 @@ TYPE_NAME_MAPPING = {
         "Biofeedback Filter",
         "Reality Filter"
     ],
+    # TODO: Something for real world interaction, i.e. Cyberphysical systems
+    # for example command, ECCM, ... for a drone piloting agent
 }
+
+
+ICE_ROLES = [
+    "Cybercombat Offensive",
+    "Cybercombat Defensive",
+    "Detection",
+    "Intrusion Defense",
+]
 
 
 class Program(object):
@@ -265,6 +275,10 @@ def validate_program_dicts():
         print("Errors in the type mapping dicts were found. Terminating.")
         sys.exit(1)
 
+
+# TODO: Use mapping dicts to create a software factory that can create sofware sets fro specific tasks
+# i.e. a defensive ICE would carry detection and tracking software, offensive ICE an attack and defense software
+# a facility management daemon would carry several skillsofts and command.
 
 if __name__ == "__main__":
     p = Program("Edit", 6)

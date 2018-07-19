@@ -5,6 +5,7 @@ import nodes
 import actors
 import software
 import random
+import numpy as np
 
 CON_NAMES = [
     # The big 10
@@ -110,19 +111,31 @@ def get_tiny_nodes():
 
 
 ## ICE
+def random_ICE(rating=None, role=None, nr_progs=None):
 
-def random_ICE(rating=None, role=None):
+    # TODO: after nr is clear. pick from different categories
+    # choose one from offensive, one from detection, one from defensive ...
+    # Also: Weight software by rareness. Attack is a lot more likely than Black Hammer
+    # maybe save that in a YAML file
+    
     if role is None:
-        role = random.choice(list(software.TYPE_NAME_MAPPING.keys()))
+        role = random.choice(list(software.ICE_ROLES))
+        
 
     if rating is None:
         rating = random.randint(1,6)
+
+    if nr_progs is None:
+        nr_progs = 1 + np.random.poisson(0.999)
 
     name = f"{random.choice(CON_NAMES)} {random.choice(ICE_NAMES).name}"
 
     try:
         payload_candidates = software.TYPE_NAME_MAPPING[role]
-        payload = random.choice(payload_candidates)
+        if nr_progs <= len(payload_candidates):
+            payload = random.sample(payload_candidates, nr_progs)
+        else:
+            payload = payload_candidates
     except KeyError:
         raise ValueError(f"Invalid role {role}")
 
