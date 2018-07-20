@@ -31,12 +31,32 @@ class Name:
         self.name = name
         self.connotations = connotations
 
+# name ideas,
+# People: Sherlock, Livingstone, Genghis Khan,
+# Animals: Rottweiler, Honeybadger
+# Mythical Figures: Angel, Argus, Valkyrie
+# Military Units: Knight, Dragoon, Samurai
+# Adjective: Defiant, Stalwart, ...
+# Subjectified (?) Verbs : Defender, ...
 ICE_NAMES = [
     Name("Rottweiler", ["offensive", "defensive"]),
     Name("Knight",  ["offensive", "defensive"]),
     Name("Bloodhound", ["defensive", "tracking"]),
+    Name("Honeybadger", ["offensive", "defensive"]),
     # TODO: expand this list
     Name("Angel", ["defensive"]),
+    Name("Sherlock", ["tracking", "detection"]),
+    Name("Samurai", ["offensive", "defensive"]),
+    Name("Valkyrie", ["denfensive"]),
+    Name("Hoplite", ["defensive"]),
+    Name("Dragoon", ["offensive"]),
+    Name("Phalanx", ["defensive"]),
+    Name("Argus", ["detection", "tracking"]),
+    Name("Defiant", ["defensive"]),
+    Name("Stalwart", ["defensive"]),
+    Name("Sunderer", ["offensive"]),
+    Name("Defender", ["defensive"]),
+    
 ]
 
 
