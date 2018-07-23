@@ -26,10 +26,20 @@ CON_NAMES = [
 
 
 
+# Connotation based matching.
+# Add a list of string tags to names, software etc.
+# Filter by matching one or more fitting tags
+# Example: Name('Angel', tags=['good', 'support', 'healing', 'defense']
+#          Program('Medic', tags=['healing', ...])
+# Interpretations:
+# 1) An ICE that carries a medic program could be named angel
+# 2) An ICE that is called medic could carry the medic program.
+
+
 class Name:
     def __init__(self, name, connotations):
         self.name = name
-        self.connotations = connotations
+        self.connotations = connotations # List of tags that describe aspects
 
 # name ideas,
 # People: Sherlock, Livingstone, Genghis Khan,
